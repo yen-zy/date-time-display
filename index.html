@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+function updateDateTime() {
+  var now = new Date();
+  var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' };
+  var formattedDateTime = now.toLocaleDateString(undefined, options);
+  document.getElementById("dateTimeDisplay").innerHTML = formattedDateTime;
+}
+
+// Update the date and time every second
+setInterval(updateDateTime, 1000);
+</script>
+</head>
+<body onload="updateDateTime()">
+  <div id="dateTimeDisplay"></div>
+</body>
+</html>
