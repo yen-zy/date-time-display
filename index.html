@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
     body {
       background-color: black;
@@ -15,41 +16,92 @@
       justify-content: center;
     }
 
-    #date {
+    #quote {
+      font-size: 24px;
+      margin-bottom: 10px;
+      opacity: 0;
+      transition: opacity 1s;
+    }
+
+    #datetime {
       font-size: 36px;
       font-weight: bold;
+      margin-top: 10px;
     }
 
     #time {
-      font-size: 24px;
+      font-size: 18px;
+    }
+
+    /* Responsive styling for smaller screens */
+    @media screen and (max-width: 600px) {
+      #quote {
+        font-size: 20px;
+      }
+
+      #datetime {
+        font-size: 30px;
+      }
+
+      #time {
+        font-size: 16px;
+      }
     }
   </style>
 </head>
 <body>
-  <div id="date">
-    <!-- Date will be displayed here -->
+  <div id="quote">
+    <!-- Quote will be displayed here -->
   </div>
-  <div id="time">
-    <!-- Time will be displayed here -->
+  <div id="datetime">
+    <!-- Date will be displayed here -->
+    <div id="time">
+      <!-- Time will be displayed here -->
+    </div>
   </div>
 
   <script>
+    // Array of motivational quotes
+    var quotes = [
+      "Believe you can and you're halfway there.",
+      "Don't watch the clock; do what it does. Keep going.",
+      "Success is not final, failure is not fatal: It is the courage to continue that counts.",
+      "The only way to do great work is to love what you do.",
+      "Believe in yourself and all that you are. Know that there is something inside you that is greater than any obstacle.",
+    ];
+
+    var quoteIndex = 0;
+
+    function getRandomQuote() {
+      return quotes[quoteIndex++ % quotes.length];
+    }
+
+    function updateQuote() {
+      var randomQuote = getRandomQuote();
+      var quoteElement = document.getElementById("quote");
+      quoteElement.style.opacity = 0;
+      setTimeout(function () {
+        quoteElement.innerHTML = randomQuote;
+        quoteElement.style.opacity = 1;
+      }, 500);
+    }
+
     function updateDateTime() {
       var now = new Date();
       var optionsDate = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-      var optionsTime = { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true }; // Use 12-hour format with leading zeros
+      var optionsTime = { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true };
       var formattedDate = now.toLocaleDateString(undefined, optionsDate);
       var formattedTime = now.toLocaleTimeString(undefined, optionsTime);
+      var dateTimeString = formattedDate + '<br>' + '<div id="time">' + formattedTime + '</div>';
 
-      document.getElementById("date").innerHTML = formattedDate;
-      document.getElementById("time").innerHTML = formattedTime;
+      document.getElementById("datetime").innerHTML = dateTimeString;
     }
 
-    // Update the date and time every second
     setInterval(updateDateTime, 1000);
-
-    // Initial update
     updateDateTime();
+
+    setInterval(updateQuote, 5000);
+    updateQuote();
   </script>
 </body>
 </html>
