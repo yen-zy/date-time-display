@@ -1,19 +1,55 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script>
-function updateDateTime() {
-  var now = new Date();
-  var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' };
-  var formattedDateTime = now.toLocaleDateString(undefined, options);
-  document.getElementById("dateTimeDisplay").innerHTML = formattedDateTime;
-}
+  <style>
+    body {
+      background-color: black;
+      color: white;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
 
-// Update the date and time every second
-setInterval(updateDateTime, 1000);
-</script>
+    #date {
+      font-size: 36px;
+      font-weight: bold;
+    }
+
+    #time {
+      font-size: 24px;
+    }
+  </style>
 </head>
-<body onload="updateDateTime()">
-  <div id="dateTimeDisplay"></div>
+<body>
+  <div id="date">
+    <!-- Date will be displayed here -->
+  </div>
+  <div id="time">
+    <!-- Time will be displayed here -->
+  </div>
+
+  <script>
+    function updateDateTime() {
+      var now = new Date();
+      var optionsDate = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+      var optionsTime = { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true }; // Use 12-hour format with leading zeros
+      var formattedDate = now.toLocaleDateString(undefined, optionsDate);
+      var formattedTime = now.toLocaleTimeString(undefined, optionsTime);
+
+      document.getElementById("date").innerHTML = formattedDate;
+      document.getElementById("time").innerHTML = formattedTime;
+    }
+
+    // Update the date and time every second
+    setInterval(updateDateTime, 1000);
+
+    // Initial update
+    updateDateTime();
+  </script>
 </body>
 </html>
