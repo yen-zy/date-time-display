@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
       background-color: black;
@@ -14,94 +15,60 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
-    }
-
-    #quote {
-      font-size: 24px;
-      margin-bottom: 10px;
-      opacity: 0;
-      transition: opacity 1s;
-    }
-
-    #datetime {
-      font-size: 36px;
+      align-items: center;
       font-weight: bold;
-      margin-top: 10px;
+    }
+
+    #day {
+      font-size: 40px;
+      color: #000;
+      padding: 10px 40px;
+      background: #fff;
+    }
+
+    #date {
+      font-size: 80px;
     }
 
     #time {
-      font-size: 18px;
+      font-size: 32px;
+      margin-top: 40px;
     }
 
-    /* Responsive styling for smaller screens */
-    @media screen and (max-width: 600px) {
-      #quote {
-        font-size: 20px;
-      }
 
-      #datetime {
-        font-size: 30px;
-      }
-
-      #time {
-        font-size: 16px;
-      }
-    }
   </style>
 </head>
 <body>
-  <div id="quote">
-    <!-- Quote will be displayed here -->
+  <div id="day">
+    <!-- Day will be displayed here -->
   </div>
-  <div id="datetime">
+  <div id="date">
     <!-- Date will be displayed here -->
-    <div id="time">
-      <!-- Time will be displayed here -->
-    </div>
+  </div>
+  <div id="time">
+    <!-- Time will be displayed here -->
   </div>
 
   <script>
-    // Array of motivational quotes
-    var quotes = [
-      "Believe you can and you're halfway there.",
-      "Don't watch the clock; do what it does. Keep going.",
-      "Success is not final, failure is not fatal: It is the courage to continue that counts.",
-      "The only way to do great work is to love what you do.",
-      "Believe in yourself and all that you are. Know that there is something inside you that is greater than any obstacle.",
-    ];
-
-    var quoteIndex = 0;
-
-    function getRandomQuote() {
-      return quotes[quoteIndex++ % quotes.length];
-    }
-
-    function updateQuote() {
-      var randomQuote = getRandomQuote();
-      var quoteElement = document.getElementById("quote");
-      quoteElement.style.opacity = 0;
-      setTimeout(function () {
-        quoteElement.innerHTML = randomQuote;
-        quoteElement.style.opacity = 1;
-      }, 500);
-    }
-
     function updateDateTime() {
       var now = new Date();
-      var optionsDate = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-      var optionsTime = { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true };
+      var optionsDay = { weekday: 'long' };
+      var optionsDate = { year: 'numeric', month: 'long', day: 'numeric' };
+      var optionsTime = { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true }; // Use 12-hour format with leading zeros
+      var formattedDay = now.toLocaleDateString(undefined, optionsDay);
       var formattedDate = now.toLocaleDateString(undefined, optionsDate);
       var formattedTime = now.toLocaleTimeString(undefined, optionsTime);
-      var dateTimeString = formattedDate + '<br>' + '<div id="time">' + formattedTime + '</div>';
 
-      document.getElementById("datetime").innerHTML = dateTimeString;
+      document.getElementById("day").innerHTML = formattedDay;
+      document.getElementById("date").innerHTML = formattedDate;
+      document.getElementById("time").innerHTML = formattedTime;
     }
 
+    // Update the date and time every second
     setInterval(updateDateTime, 1000);
-    updateDateTime();
 
-    setInterval(updateQuote, 5000);
-    updateQuote();
+    // Initial update
+    updateDateTime();
   </script>
 </body>
 </html>
