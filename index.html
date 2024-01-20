@@ -20,39 +20,47 @@
     }
 
     #day {
-      font-size: 40px;
+      display: inline-block;
+      font-size: 80px;
       color: #000;
       padding: 10px 40px;
       background: #fff;
+      text-transform: uppercase;
     }
 
     #date {
       font-size: 80px;
+      margin-top: 10px;
     }
 
     #time {
       font-size: 32px;
-      margin-top: 40px;
+      margin-top: 0px;
     }
 
+    .container {
+      text-align: left;
+    }
 
   </style>
 </head>
 <body>
-  <div id="day">
-    <!-- Day will be displayed here -->
-  </div>
-  <div id="date">
-    <!-- Date will be displayed here -->
-  </div>
-  <div id="time">
-    <!-- Time will be displayed here -->
+  <div class="container"> 
+    <div id="day">
+      <!-- Day will be displayed here -->
+    </div>
+    <div id="date">
+      <!-- Date will be displayed here -->
+    </div>
+    <div id="time">
+      <!-- Time will be displayed here -->
+    </div>
   </div>
 
   <script>
     function updateDateTime() {
       var now = new Date();
-      var optionsDay = { weekday: 'long' };
+      var optionsDay = { weekday: 'short' };
       var optionsDate = { year: 'numeric', month: 'long', day: 'numeric' };
       var optionsTime = { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true }; // Use 12-hour format with leading zeros
       var formattedDay = now.toLocaleDateString(undefined, optionsDay);
